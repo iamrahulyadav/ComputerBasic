@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ComputerBasic</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_diplay_list">DiplayListActivity</string>
+    <string name="title_activity_display_text">DisplayTextActivity</string>
+    <string name="title_activity_short_keys">ShortKeysActivity</string>
+    <string name="title_activity_short_key_detail">ShortKeyDetailActivity</string>
+</resources>
