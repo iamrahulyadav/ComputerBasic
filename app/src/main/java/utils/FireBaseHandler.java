@@ -58,11 +58,11 @@ public class FireBaseHandler {
     public void uploadShortKeys(final KeyBoardShortcut keyBoardShortcut, String shortkeyType, final OnDatalistener onDatalistener) {
 
 
-        mDatabaseRef = mFirebaseDatabase.getReference().child("Basic Computer/" + shortkeyType + "/");
+        mDatabaseRef = mFirebaseDatabase.getReference().child("ShortKey Data/" + shortkeyType + "/");
 
         keyBoardShortcut.setShortKeyUID(mDatabaseRef.push().getKey());
 
-        DatabaseReference mDatabaseRef1 = mFirebaseDatabase.getReference().child("Basic Computer/" + shortkeyType + "/" + keyBoardShortcut.getShortKeyUID());
+        DatabaseReference mDatabaseRef1 = mFirebaseDatabase.getReference().child("ShortKey Data/" + shortkeyType + "/" + keyBoardShortcut.getShortKeyUID());
 
 
         mDatabaseRef1.setValue(keyBoardShortcut).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -87,7 +87,7 @@ public class FireBaseHandler {
     public void downloadKeyList(int limit, String shortKeyType, final OnDatalistener onDatalistener) {
 
 
-        mDatabaseRef = mFirebaseDatabase.getReference().child("Basic Computer/" + shortKeyType + "/");
+        mDatabaseRef = mFirebaseDatabase.getReference().child("ShortKey Data/" + shortKeyType + "/");
 
         Query myref2 = mDatabaseRef.orderByKey().limitToFirst(limit);
 

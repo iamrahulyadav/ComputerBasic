@@ -68,7 +68,7 @@ public class DiplayListActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
 
-                Toast.makeText(DiplayListActivity.this, mArrayList.get(position) + " position " + position + subTopicName, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(DiplayListActivity.this, mArrayList.get(position) + " position " + position + subTopicName, Toast.LENGTH_SHORT).show();
 
             }
         });

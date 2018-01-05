@@ -1,5 +1,6 @@
 package app.computer.basic.quiz.craftystudio.computerbasic;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,12 +24,14 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
     ShortKeyDetailListAdapter mShortKeyAdapter;
     ArrayList<KeyBoardShortcut> mArrayList = new ArrayList<>();
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_short_key_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +46,12 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
 
 
         String shortKeyType = getIntent().getExtras().getString("ShortKeyType");
+        toolbar.setTitle(shortKeyType);
+        setSupportActionBar(toolbar);
+
 
         FireBaseHandler fireBaseHandler = new FireBaseHandler();
+        showDialog();
         fireBaseHandler.downloadKeyList(30, shortKeyType, new FireBaseHandler.OnDatalistener() {
             @Override
             public void onDataDownLoad(String itemData, boolean isSuccessful) {
@@ -59,8 +66,10 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
                     mShortKeyAdapter = new ShortKeyDetailListAdapter(getApplicationContext(), R.layout.custom_shortkey_textview, mArrayList);
                     mSHortKeyListview.setAdapter(mShortKeyAdapter);
 
-                  //  Toast.makeText(ShortKeyDetailActivity.this, keyBoardShortcutArrayList.get(0).getShortKeyCode(), Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(ShortKeyDetailActivity.this, keyBoardShortcutArrayList.get(0).getShortKeyCode(), Toast.LENGTH_SHORT).show();
                 }
+
+                hideDialog();
             }
 
             @Override
@@ -68,6 +77,16 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    void showDialog() {
+        progressDialog = new ProgressDialog(ShortKeyDetailActivity.this);
+        progressDialog.setMessage("Loading Data..Please Wait..");
+        progressDialog.show();
+    }
+
+    void hideDialog() {
+        progressDialog.hide();
     }
 
 }

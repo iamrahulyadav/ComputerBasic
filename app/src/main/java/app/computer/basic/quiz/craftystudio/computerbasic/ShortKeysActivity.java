@@ -42,7 +42,7 @@ public class ShortKeysActivity extends AppCompatActivity {
 
         Intent intent = new Intent(ShortKeysActivity.this, ShortKeyDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("ShortKeyType", " Microsoft Windows Short Keys");
+        bundle.putString("ShortKeyType", "Microsoft Windows Short Keys");
         intent.putExtras(bundle);
         startActivity(intent);
     }

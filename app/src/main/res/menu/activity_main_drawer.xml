@@ -3,24 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+    <item
+        android:id="@+id/nav_rate"
+        android:icon="@drawable/ic_star"
+        android:title="Rate Us" />
+
 
     <item android:title="Communicate">
         <menu>
@@ -29,9 +16,30 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_suggestion"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Give Suggestion" />
+        </menu>
+    </item>
+
+    <item android:title="Other Apps">
+        <menu>
+            <item
+                android:id="@+id/nav_aptitude"
+                android:title="Aptitude Master" />
+            <item
+                android:id="@+id/nav_editorial"
+                android:title="Daily Editorial" />
+            <item
+                android:id="@+id/nav_pib"
+                 android:title="PIB News" />
+            <item
+                android:id="@+id/nav_logical"
+                 android:title="Logical Reasoning" />
+            <item
+                android:id="@+id/nav_personality"
+                android:title="Personality Development" />
+
         </menu>
     </item>
 

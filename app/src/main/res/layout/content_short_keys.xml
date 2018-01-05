@@ -50,13 +50,14 @@
                             android:layout_height="60dp"
                             android:layout_margin="4dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_basic_computer" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Basic Short Key"
                             android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -77,20 +78,21 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="30dp"
+                        android:layout_margin="28dp"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:layout_margin="4dp"
+                            android:layout_margin="3dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_windows" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Windows Short Key"
+                            android:textColor="@color/colorWhite"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -129,12 +131,13 @@
                             android:layout_height="60dp"
                             android:layout_margin="4dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_excel" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Excel Short Key"
+                            android:textColor="@color/colorWhite"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -164,13 +167,14 @@
                             android:layout_height="60dp"
                             android:layout_margin="4dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_word" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Word Short Key"
                             android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -206,16 +210,16 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:layout_margin="4dp"
-
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:layout_margin="2dp"
+                            android:src="@drawable/ic_chrome" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Chrome Short Keys "
                             android:textAlignment="center"
-                            android:textSize="16sp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -241,16 +245,16 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:layout_margin="4dp"
-
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:layout_margin="3dp"
+                            android:src="@drawable/ic_special" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Print Special Char"
+                            android:textColor="@color/colorWhite"
                             android:textAlignment="center"
-                            android:textSize="16sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -287,12 +291,13 @@
                             android:layout_height="60dp"
                             android:layout_margin="4dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_linux" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Linux Short key"
+                            android:textColor="@color/colorWhite"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -322,13 +327,14 @@
                             android:layout_height="60dp"
                             android:layout_margin="4dp"
 
-                            android:src="@drawable/ic_menu_gallery" />
+                            android:src="@drawable/ic_apple" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Gallery time"
+                            android:text="Apple Short Key"
                             android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 

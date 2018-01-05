@@ -2,6 +2,7 @@ package app.computer.basic.quiz.craftystudio.computerbasic;
 
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import utils.AppRater;
 import utils.FireBaseHandler;
 import utils.KeyBoardShortcut;
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
                 keyBoardShortcut.setShortKeyCode("ceg ");
                 keyBoardShortcut.setShortKeyExplaination("hefih");
                 FireBaseHandler fireBaseHandler = new FireBaseHandler();
-                fireBaseHandler.uploadShortKeys(keyBoardShortcut, "Basic Shortcut Keys", new FireBaseHandler.OnDatalistener() {
+                fireBaseHandler.uploadShortKeys(keyBoardShortcut, "Special Chracter Short Key", new FireBaseHandler.OnDatalistener() {
                     @Override
                     public void onDataDownLoad(String itemData, boolean isSuccessful) {
 
@@ -84,6 +86,9 @@ public class MainActivity extends AppCompatActivity
         mMsWord = (CardView) findViewById(R.id.main_msword_cardview);
         mPowerPoint = (CardView) findViewById(R.id.main_powerpoint_cardview);
 
+        AppRater appRater = new AppRater();
+        appRater.app_launched(getApplicationContext());
+
     }
 
     @Override
@@ -111,9 +116,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -124,20 +127,66 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Intent intent = new Intent(MainActivity.this, ShortKeysActivity.class);
-            startActivity(intent);
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_aptitude) {
+            try {
+                String link = "https://play.google.com/store/apps/details?id=app.aptitude.quiz.craftystudio.aptitudequiz";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
 
-        } else if (id == R.id.nav_slideshow) {
+                // Answers.getInstance().logCustom(new CustomEvent("Logical Reasoning Click"));
 
-        } else if (id == R.id.nav_manage) {
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (id == R.id.nav_editorial) {
+            try {
+                String link = "https://play.google.com/store/apps/details?id=app.craftystudio.vocabulary.dailyeditorial";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+
+                // Answers.getInstance().logCustom(new CustomEvent("Logical Reasoning Click"));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }else if (id == R.id.nav_personality) {
+            try {
+                String link = "https://play.google.com/store/apps/details?id=app.story.craftystudio.shortstory";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+
+                // Answers.getInstance().logCustom(new CustomEvent("Logical Reasoning Click"));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        } else if (id == R.id.nav_logical) {
+            onLogicalReasoningClick();
+
+        } else if (id == R.id.nav_pib) {
+            try {
+                String link = "https://play.google.com/store/apps/details?id=app.crafty.studio.current.affairs.pib";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+
+                // Answers.getInstance().logCustom(new CustomEvent("Logical Reasoning Click"));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (id == R.id.nav_rate) {
+
+            onRateUs();
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            onShare();
+        } else if (id == R.id.nav_suggestion) {
 
+            giveSuggestion();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -197,9 +246,71 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void openMsWord(View view) {
-    }
 
     public void openPowerPoint(View view) {
+
+        ArrayList<String> mArrayList = new ArrayList<>();
+        mArrayList.add("POWERPOINT BASICS");
+        mArrayList.add("CREATE PRESENTATION");
+        mArrayList.add("ADDING TEXT");
+        mArrayList.add("WORKING WITH OUTLINES");
+        mArrayList.add("VIEWS IN PRESENTATION");
+        mArrayList.add("SETTING BACKGROUND");
+        mArrayList.add("ADDING HEADER & FOOTER");
+        mArrayList.add("FORMATTING PRESENTATION");
+
+
+        Intent intent = new Intent(MainActivity.this, DiplayListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("ArrayList", mArrayList);
+        bundle.putString("Name", "MsPowerPoint");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void onLogicalReasoningClick() {
+        try {
+            String link = "https://play.google.com/store/apps/details?id=app.reasoning.logical.quiz.craftystudio.logicalreasoning";
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+
+            // Answers.getInstance().logCustom(new CustomEvent("Logical Reasoning Click"));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void giveSuggestion() {
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"acraftystudio@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Suggestion For " + getResources().getString(R.string.app_name));
+        emailIntent.setType("text/plain");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail From..."));
+
+    }
+
+    private void onRateUs() {
+        try {
+            String link = "https://play.google.com/store/apps/details?id=app.computer.basic.quiz.craftystudio.computerbasic";
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void onShare() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+
+        //sharingIntent.putExtra(Intent.EXTRA_STREAM, newsMetaInfo.getNewsImageLocalPath());
+
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                " " + "\n\n https://goo.gl/66Bpr2 " + "\n Basic Computer App \n Download App Now");
+        startActivity(Intent.createChooser(sharingIntent, "Share Basic Computer App via"));
+
+
     }
 }
