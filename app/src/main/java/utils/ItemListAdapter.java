@@ -49,7 +49,7 @@ public class ItemListAdapter extends ArrayAdapter {
 
         TextView topicNameTextview = (TextView) convertView.findViewById(R.id.custom_textview);
         topicNameTextview.setText((String)mTopicList.get(position));
-        topicNameTextview.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickListener.onItemCLickListener(view,position);

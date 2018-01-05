@@ -14,6 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+
 import java.util.ArrayList;
 
 import utils.ClickListener;
@@ -49,6 +52,12 @@ public class DiplayListActivity extends AppCompatActivity {
         mArrayList = getIntent().getExtras().getStringArrayList("ArrayList");
         mainTopicName = getIntent().getExtras().getString("Name");
 
+        try{
+            getActionBar().setTitle(mainTopicName);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         mAdapter = new ItemListAdapter(getApplicationContext(), R.layout.custom_textview, mArrayList);
 
         displayItemListview = (ListView) findViewById(R.id.display_item_listview);
@@ -73,6 +82,12 @@ public class DiplayListActivity extends AppCompatActivity {
             }
         });
 
+
+        try{
+            Answers.getInstance().logCustom(new CustomEvent("Topic list open").putCustomAttribute("Topic name",mainTopicName));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

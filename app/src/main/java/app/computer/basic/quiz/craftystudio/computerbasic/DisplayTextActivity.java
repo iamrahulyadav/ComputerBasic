@@ -14,6 +14,9 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +63,12 @@ public class DisplayTextActivity extends AppCompatActivity {
         showDialog();
         //download data from database
         downloadFullData(mMainTopic, mSubTopic);
+
+        try{
+            Answers.getInstance().logContentView(new ContentViewEvent().putContentName(mSubTopic +" - "+mMainTopic).putContentType(mMainTopic));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
     }
@@ -139,10 +148,9 @@ public class DisplayTextActivity extends AppCompatActivity {
     private void openShareDialog(Uri shortUrl) {
 
         try {
-            /*
-            Answers.getInstance().logCustom(new CustomEvent("Share link created").putCustomAttribute("Content Id", questions.getQuestionUID())
-                    .putCustomAttribute("Shares", questions.getQuestionTopicName()));
-            */
+
+            Answers.getInstance().logCustom(new CustomEvent("Share link created").putCustomAttribute("Topic",mMainTopic ).putCustomAttribute("sub topic", mSubTopic));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -166,7 +174,7 @@ public class DisplayTextActivity extends AppCompatActivity {
 
     void showDialog() {
         progressDialog = new ProgressDialog(DisplayTextActivity.this);
-        progressDialog.setMessage("Loading Data..Please Wait..");
+        progressDialog.setMessage("Loading...");
         progressDialog.show();
     }
 

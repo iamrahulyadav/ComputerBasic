@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+
 import java.util.ArrayList;
 
 import utils.FireBaseHandler;
@@ -77,6 +80,13 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
 
             }
         });
+
+
+        try{
+            Answers.getInstance().logContentView(new ContentViewEvent().putContentType("Short Keys").putContentName(shortKeyType));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     void showDialog() {

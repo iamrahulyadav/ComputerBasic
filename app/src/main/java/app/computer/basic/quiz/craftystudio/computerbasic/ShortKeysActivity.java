@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
+
 public class ShortKeysActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +30,12 @@ public class ShortKeysActivity extends AppCompatActivity {
             }
         });
 
+
+        try{
+            Answers.getInstance().logCustom(new CustomEvent("Short key list open"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
