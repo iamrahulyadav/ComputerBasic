@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity
         mMsWord = (CardView) findViewById(R.id.main_msword_cardview);
         mPowerPoint = (CardView) findViewById(R.id.main_powerpoint_cardview);
 
-        AppRater appRater = new AppRater();
-        appRater.app_launched(getApplicationContext());
+
 
     }
 

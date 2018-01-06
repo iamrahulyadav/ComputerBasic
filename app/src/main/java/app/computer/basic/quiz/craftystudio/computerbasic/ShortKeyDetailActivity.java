@@ -16,6 +16,7 @@ import com.crashlytics.android.answers.ContentViewEvent;
 
 import java.util.ArrayList;
 
+import utils.AppRater;
 import utils.FireBaseHandler;
 import utils.ItemListAdapter;
 import utils.KeyBoardShortcut;
@@ -84,9 +85,19 @@ public class ShortKeyDetailActivity extends AppCompatActivity {
 
         try{
             Answers.getInstance().logContentView(new ContentViewEvent().putContentType("Short Keys").putContentName(shortKeyType));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        AppRater.app_launched(this);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     void showDialog() {

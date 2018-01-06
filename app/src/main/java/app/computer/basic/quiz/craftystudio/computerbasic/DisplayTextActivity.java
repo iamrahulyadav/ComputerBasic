@@ -26,6 +26,7 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.ArrayList;
 
+import utils.AppRater;
 import utils.FireBaseHandler;
 import utils.KeyBoardShortcut;
 
@@ -66,11 +67,21 @@ public class DisplayTextActivity extends AppCompatActivity {
 
         try{
             Answers.getInstance().logContentView(new ContentViewEvent().putContentName(mSubTopic +" - "+mMainTopic).putContentType(mMainTopic));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
+        AppRater.app_launched(this);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     void downloadFullData(String mainTopic, String subTopic) {

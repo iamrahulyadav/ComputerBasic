@@ -85,10 +85,19 @@ public class DiplayListActivity extends AppCompatActivity {
 
         try{
             Answers.getInstance().logCustom(new CustomEvent("Topic list open").putCustomAttribute("Topic name",mainTopicName));
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 

@@ -17,7 +17,7 @@ public class AppRater {
     private final static String APP_PNAME = "app.computer.basic.quiz.craftystudio.computerbasic";// Package Name
 
     private final static int DAYS_UNTIL_PROMPT = 0;//Min number of days
-    private final static int LAUNCHES_UNTIL_PROMPT = 3;//Min number of launches
+    private final static int LAUNCHES_UNTIL_PROMPT = 5;//Min number of launches
 
     public static void app_launched(Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
@@ -54,7 +54,7 @@ public class AppRater {
 
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("Thank You!");
+            builder.setTitle("Rate the app");
             builder.setMessage("If you like the App, Please Give Review and support us")
                     .setPositiveButton("Rate Now", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {

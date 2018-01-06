@@ -33,10 +33,18 @@ public class ShortKeysActivity extends AppCompatActivity {
 
         try{
             Answers.getInstance().logCustom(new CustomEvent("Short key list open"));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     public void basicShortKeys(View view) {
