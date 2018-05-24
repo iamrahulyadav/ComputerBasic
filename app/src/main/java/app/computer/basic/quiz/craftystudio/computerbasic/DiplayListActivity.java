@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import utils.FireBaseHandler;
 import utils.ItemListAdapter;
 import utils.KeyBoardShortcut;
 
+import com.facebook.ads.*;
+
 public class DiplayListActivity extends AppCompatActivity {
 
     ListView displayItemListview;
@@ -31,6 +34,8 @@ public class DiplayListActivity extends AppCompatActivity {
     ArrayList<String> mArrayList = new ArrayList<>();
 
     String mainTopicName;
+
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +57,9 @@ public class DiplayListActivity extends AppCompatActivity {
         mArrayList = getIntent().getExtras().getStringArrayList("ArrayList");
         mainTopicName = getIntent().getExtras().getString("Name");
 
-        try{
+        try {
             getActionBar().setTitle(mainTopicName);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -77,27 +82,70 @@ public class DiplayListActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
 
-              //  Toast.makeText(DiplayListActivity.this, mArrayList.get(position) + " position " + position + subTopicName, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(DiplayListActivity.this, mArrayList.get(position) + " position " + position + subTopicName, Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
-        try{
-            Answers.getInstance().logCustom(new CustomEvent("Topic list open").putCustomAttribute("Topic name",mainTopicName));
+        try {
+            Answers.getInstance().logCustom(new CustomEvent("Topic list open").putCustomAttribute("Topic name", mainTopicName));
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //Display banner add
+        // Instantiate an AdView view
+        adView = new AdView(this, "1359885114112144_1359886577445331", AdSize.BANNER_HEIGHT_50);
+
+        LinearLayout adcontainer = (LinearLayout) findViewById(R.id.display_list_banner_container);
+        adcontainer.addView(adView);
+
+        // Request an ad
+        adView.loadAd();
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
 
