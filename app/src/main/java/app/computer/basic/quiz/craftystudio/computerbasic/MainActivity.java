@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.ads.MobileAds;
+
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //initializing for admob ads
+        MobileAds.initialize(this, "ca-app-pub-8455191357100024~1599704169");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -11,12 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
+import com.facebook.ads.AdListener;
+import com.google.android.gms.ads.*;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -26,9 +32,13 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.ArrayList;
 
+
 import utils.AppRater;
 import utils.FireBaseHandler;
 import utils.KeyBoardShortcut;
+
+import com.facebook.ads.*;
+
 
 public class DisplayTextActivity extends AppCompatActivity {
 
@@ -37,6 +47,8 @@ public class DisplayTextActivity extends AppCompatActivity {
     WebView webView;
 
     ProgressDialog progressDialog;
+
+    private NativeAd nativeAd_above, nativeAd_below;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +77,164 @@ public class DisplayTextActivity extends AppCompatActivity {
         //download data from database
         downloadFullData(mMainTopic, mSubTopic);
 
-        try{
-            Answers.getInstance().logContentView(new ContentViewEvent().putContentName(mSubTopic +" - "+mMainTopic).putContentType(mMainTopic));
+        try {
+            Answers.getInstance().logContentView(new ContentViewEvent().putContentName(mSubTopic + " - " + mMainTopic).putContentType(mMainTopic));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         AppRater.app_launched(this);
+
+        //above article native ad 1
+        loadAboveNativeAd();
+
+        //below article native ad 2
+        loadBelowNativeAd();
+    }
+
+    public void initializeTopAdmobAds() {
+
+
+        try {
+            final AdView admobView = new AdView(DisplayTextActivity.this);
+            admobView.setAdSize(AdSize.SMART_BANNER);
+            admobView.setAdUnitId("ca-app-pub-8455191357100024/5825604225");
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            admobView.loadAd(adRequest);
+
+            admobView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+            admobView.setAdListener(new com.google.android.gms.ads.AdListener() {
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+
+                    LinearLayout admobContainer1 = findViewById(R.id.display_text_native_ad_container_1);
+                    admobContainer1.setVisibility(View.VISIBLE);
+                    admobContainer1.removeAllViews();
+                    admobContainer1.addView(admobView);
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void initializeBottomAdmobAds() {
+
+
+        try {
+            final AdView admobView = new AdView(DisplayTextActivity.this);
+            admobView.setAdSize(AdSize.MEDIUM_RECTANGLE);
+            admobView.setAdUnitId("ca-app-pub-8455191357100024/6321972835");
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            admobView.loadAd(adRequest);
+
+            admobView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+            admobView.setAdListener(new com.google.android.gms.ads.AdListener() {
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+
+                    LinearLayout admobContainer1 = findViewById(R.id.display_text_native_ad_container_2);
+                    admobContainer1.setVisibility(View.VISIBLE);
+                    admobContainer1.removeAllViews();
+                    admobContainer1.addView(admobView);
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void loadBelowNativeAd() {
+
+        nativeAd_below = new NativeAd(this, "1359885114112144_1362006790566643");
+
+        nativeAd_below.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+                initializeBottomAdmobAds();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                View adView = NativeAdView.render(DisplayTextActivity.this, nativeAd_below, NativeAdView.Type.HEIGHT_300);
+                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.display_text_native_ad_container_2);
+                // Add the Native Ad View to your ad container
+                nativeAdContainer.addView(adView);
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        nativeAd_below.loadAd();
+
+    }
+
+    public void loadAboveNativeAd() {
+        //above article native ad 1
+        nativeAd_above = new NativeAd(this, "1359885114112144_1362002810567041");
+
+        nativeAd_above.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+                initializeTopAdmobAds();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                View adView = NativeAdView.render(DisplayTextActivity.this, nativeAd_above, NativeAdView.Type.HEIGHT_120);
+                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.display_text_native_ad_container_1);
+                // Add the Native Ad View to your ad container
+                nativeAdContainer.addView(adView);
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+
+        nativeAd_above.loadAd();
 
     }
 
@@ -160,7 +320,7 @@ public class DisplayTextActivity extends AppCompatActivity {
 
         try {
 
-            Answers.getInstance().logCustom(new CustomEvent("Share link created").putCustomAttribute("Topic",mMainTopic ).putCustomAttribute("sub topic", mSubTopic));
+            Answers.getInstance().logCustom(new CustomEvent("Share link created").putCustomAttribute("Topic", mMainTopic).putCustomAttribute("sub topic", mSubTopic));
 
         } catch (Exception e) {
             e.printStackTrace();
