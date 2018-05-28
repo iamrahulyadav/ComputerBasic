@@ -16,12 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.NativeAd;
+import com.facebook.ads.NativeAdView;
 import com.google.android.gms.ads.MobileAds;
 
 import io.fabric.sdk.android.Fabric;
+
 import java.util.ArrayList;
 
 import utils.AppRater;
@@ -95,6 +102,41 @@ public class MainActivity extends AppCompatActivity
         mPowerPoint = (CardView) findViewById(R.id.main_powerpoint_cardview);
 
 
+        initializeTopNativeAd();
+
+    }
+
+
+    public void initializeTopNativeAd() {
+        //above article native ad 1
+        final NativeAd nativeAd_above = new NativeAd(this, "1359885114112144_1362002810567041");
+
+        nativeAd_above.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                View adView = NativeAdView.render(MainActivity.this, nativeAd_above, NativeAdView.Type.HEIGHT_120);
+                CardView nativeAdContainer =  findViewById(R.id.main_native_adContainer);
+                // Add the Native Ad View to your ad container
+                nativeAdContainer.addView(adView);
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+
+        nativeAd_above.loadAd();
 
     }
 
@@ -159,7 +201,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
 
             }
-        }else if (id == R.id.nav_personality) {
+        } else if (id == R.id.nav_personality) {
             try {
                 String link = "https://play.google.com/store/apps/details?id=app.story.craftystudio.shortstory";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
@@ -214,6 +256,7 @@ public class MainActivity extends AppCompatActivity
         mArrayList.add("INPUT & OUTPUT DEVICES");
         mArrayList.add("HARDWARE & SOFTWARE COMPONENT");
         mArrayList.add("INTERNET & INTRANET");
+
 
 
         Intent intent = new Intent(MainActivity.this, DiplayListActivity.class);

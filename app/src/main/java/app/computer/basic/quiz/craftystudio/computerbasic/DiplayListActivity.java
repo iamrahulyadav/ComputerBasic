@@ -1,12 +1,14 @@
 package app.computer.basic.quiz.craftystudio.computerbasic;
 
 import android.content.Intent;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -26,6 +28,10 @@ import utils.ItemListAdapter;
 import utils.KeyBoardShortcut;
 
 import com.facebook.ads.*;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.google.android.gms.ads.*;
 
 public class DiplayListActivity extends AppCompatActivity {
 
@@ -110,29 +116,68 @@ public class DiplayListActivity extends AppCompatActivity {
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+                initializeTopAdmobAds();
 
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
 
-                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAdClicked(Ad ad) {
-                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onLoggingImpression(Ad ad) {
-                Toast.makeText(DiplayListActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+
+
+
+    public void initializeTopAdmobAds() {
+
+
+        try {
+            final com.google.android.gms.ads.AdView admobView = new com.google.android.gms.ads.AdView(DiplayListActivity.this);
+            admobView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER);
+            admobView.setAdUnitId("ca-app-pub-8455191357100024/5825604225");
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            admobView.loadAd(adRequest);
+
+            admobView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+            admobView.setAdListener(new com.google.android.gms.ads.AdListener() {
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+
+                    LinearLayout admobContainer1 = findViewById(R.id.display_list_banner_container);
+                    admobContainer1.setVisibility(View.VISIBLE);
+                    admobContainer1.removeAllViews();
+                    admobContainer1.addView(admobView);
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/display_text_native_ad_container_1"
+                    android:id="@+id/displayText_topNative_adcontainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"></LinearLayout>
@@ -41,7 +41,7 @@
                 </WebView>
 
                 <LinearLayout
-                    android:id="@+id/display_text_native_ad_container_2"
+                    android:id="@+id/displayText_bottomNative_adcontainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"></LinearLayout>

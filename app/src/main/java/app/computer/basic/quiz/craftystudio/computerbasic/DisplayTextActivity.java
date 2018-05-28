@@ -89,10 +89,10 @@ public class DisplayTextActivity extends AppCompatActivity {
         AppRater.app_launched(this);
 
         //above article native ad 1
-        loadAboveNativeAd();
+        initializeTopNativeAd();
 
         //below article native ad 2
-        loadBelowNativeAd();
+        initializeBottomNativeAd();
     }
 
     public void initializeTopAdmobAds() {
@@ -119,7 +119,7 @@ public class DisplayTextActivity extends AppCompatActivity {
                 public void onAdLoaded() {
                     super.onAdLoaded();
 
-                    LinearLayout admobContainer1 = findViewById(R.id.display_text_native_ad_container_1);
+                    LinearLayout admobContainer1 = findViewById(R.id.displayText_topNative_adcontainer);
                     admobContainer1.setVisibility(View.VISIBLE);
                     admobContainer1.removeAllViews();
                     admobContainer1.addView(admobView);
@@ -157,7 +157,7 @@ public class DisplayTextActivity extends AppCompatActivity {
                 public void onAdLoaded() {
                     super.onAdLoaded();
 
-                    LinearLayout admobContainer1 = findViewById(R.id.display_text_native_ad_container_2);
+                    LinearLayout admobContainer1 = findViewById(R.id.displayText_bottomNative_adcontainer);
                     admobContainer1.setVisibility(View.VISIBLE);
                     admobContainer1.removeAllViews();
                     admobContainer1.addView(admobView);
@@ -171,7 +171,7 @@ public class DisplayTextActivity extends AppCompatActivity {
 
     }
 
-    private void loadBelowNativeAd() {
+    private void initializeBottomNativeAd() {
 
         nativeAd_below = new NativeAd(this, "1359885114112144_1362006790566643");
 
@@ -185,7 +185,7 @@ public class DisplayTextActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded(Ad ad) {
                 View adView = NativeAdView.render(DisplayTextActivity.this, nativeAd_below, NativeAdView.Type.HEIGHT_300);
-                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.display_text_native_ad_container_2);
+                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.displayText_bottomNative_adcontainer);
                 // Add the Native Ad View to your ad container
                 nativeAdContainer.addView(adView);
             }
@@ -204,7 +204,7 @@ public class DisplayTextActivity extends AppCompatActivity {
 
     }
 
-    public void loadAboveNativeAd() {
+    public void initializeTopNativeAd() {
         //above article native ad 1
         nativeAd_above = new NativeAd(this, "1359885114112144_1362002810567041");
 
@@ -218,7 +218,7 @@ public class DisplayTextActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded(Ad ad) {
                 View adView = NativeAdView.render(DisplayTextActivity.this, nativeAd_above, NativeAdView.Type.HEIGHT_120);
-                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.display_text_native_ad_container_1);
+                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.displayText_topNative_adcontainer);
                 // Add the Native Ad View to your ad container
                 nativeAdContainer.addView(adView);
             }
