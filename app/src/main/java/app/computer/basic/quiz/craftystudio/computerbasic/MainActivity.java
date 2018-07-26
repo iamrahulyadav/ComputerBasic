@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onAdLoaded(Ad ad) {
                 View adView = NativeAdView.render(MainActivity.this, nativeAd_above, NativeAdView.Type.HEIGHT_120);
-                CardView nativeAdContainer =  findViewById(R.id.main_native_adContainer);
+                CardView nativeAdContainer = findViewById(R.id.main_native_adContainer);
                 // Add the Native Ad View to your ad container
                 nativeAdContainer.addView(adView);
             }
@@ -230,7 +230,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_rate) {
 
-            onRateUs();
+            Intent intent = new Intent(MainActivity.this, ComputerQuizTopicActivity.class);
+            startActivity(intent);
+
+            //onRateUs();
         } else if (id == R.id.nav_share) {
 
             onShare();
@@ -256,7 +259,6 @@ public class MainActivity extends AppCompatActivity
         mArrayList.add("INPUT & OUTPUT DEVICES");
         mArrayList.add("HARDWARE & SOFTWARE COMPONENT");
         mArrayList.add("INTERNET & INTRANET");
-
 
 
         Intent intent = new Intent(MainActivity.this, DiplayListActivity.class);

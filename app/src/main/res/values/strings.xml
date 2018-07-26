@@ -9,4 +9,6 @@
     <string name="title_activity_display_text">Learn Basics</string>
     <string name="title_activity_short_keys">ShortKeysActivity</string>
     <string name="title_activity_short_key_detail">Short Key</string>
+    <string name="title_activity_computer_quiz">Computer Quiz</string>
+    <string name="title_activity_computer_quiz_topic">Computer Quiz Topic</string>
 </resources>

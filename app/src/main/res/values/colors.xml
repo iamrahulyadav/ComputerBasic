@@ -11,4 +11,19 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorTransparent">#00ffffff</color>
 
+
+    <color name="colorWhiteBg">#ffffff</color>
+
+    <color name="colorWhiteGreyish">#d4c3c4c4</color>
+
+    <color name="colorLightWhiteBg">#e4e0e0</color>
+
+    <color name="colorLightBlueBg">#2b92f2</color>
+
+    <color name="colorMainText">#a3adc7</color>
+
+     <color name="colorBlackish">#5f6263</color>
+
+    <color name="colorWhitish">#edf1f4</color>
+
 </resources>

@@ -41,13 +41,13 @@ public class ItemListAdapter extends ArrayAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.custom_textview, null, false);
+            convertView = layoutInflater.inflate(R.layout.custom_quiz_textview, null, false);
         }
         //getting the view
         //  View view = layoutInflater.inflate(mResourceID, null, false);
 
 
-        TextView topicNameTextview = (TextView) convertView.findViewById(R.id.custom_textview);
+        TextView topicNameTextview = (TextView) convertView.findViewById(R.id.customquiz_textview);
         topicNameTextview.setText((String)mTopicList.get(position));
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
