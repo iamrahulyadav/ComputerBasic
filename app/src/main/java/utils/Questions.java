@@ -17,6 +17,33 @@ public class Questions implements Serializable {
     private String questionExplaination;
     private String questionTopicName;
     private String questionUID;
+    private boolean pusnNotification;
+    private String notificationText;
+    private int randomNumber;
+
+    public String getNotificationText() {
+        return notificationText;
+    }
+
+    public void setNotificationText(String notificationText) {
+        this.notificationText = notificationText;
+    }
+
+    public int getRandomNumber() {
+        return randomNumber;
+    }
+
+    public void setRandomNumber(int randomNumber) {
+        this.randomNumber = randomNumber;
+    }
+
+    public boolean isPusnNotification() {
+        return pusnNotification;
+    }
+
+    public void setPusnNotification(boolean pusnNotification) {
+        this.pusnNotification = pusnNotification;
+    }
 
     public String getQuestionName() {
         return questionName;

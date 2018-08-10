@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private CardView mBasicComputerCardview, mShortKey, mMsExcel, mMsWord, mPowerPoint;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,12 +92,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        mBasicComputerCardview = (CardView) findViewById(R.id.main_computer_cardview);
-        mShortKey = (CardView) findViewById(R.id.main_shortkey_cardview);
-        mMsExcel = (CardView) findViewById(R.id.main_msexcel_cardview);
-        mMsWord = (CardView) findViewById(R.id.main_msword_cardview);
-        mPowerPoint = (CardView) findViewById(R.id.main_powerpoint_cardview);
 
 
         initializeTopNativeAd();
@@ -229,17 +221,16 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_rate) {
-
-            Intent intent = new Intent(MainActivity.this, ComputerQuizTopicActivity.class);
-            startActivity(intent);
-
-            //onRateUs();
+            onRateUs();
         } else if (id == R.id.nav_share) {
 
             onShare();
         } else if (id == R.id.nav_suggestion) {
 
             giveSuggestion();
+        } else if (id == R.id.nav_quiz) {
+            onQuiz();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -366,4 +357,16 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+    private void onQuiz() {
+        Intent intent = new Intent(MainActivity.this, ComputerQuizTopicActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void openComputerQuiz(View view) {
+        Intent intent = new Intent(MainActivity.this, ComputerQuizTopicActivity.class);
+        startActivity(intent);
+
+    }
 }

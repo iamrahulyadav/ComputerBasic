@@ -43,33 +43,27 @@ public class ComputerQuizTopicActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Questions questions = new Questions();
-                questions.setQuestionTopicName("Basic");
-                questions.setOptionA("ab");
-                questions.setOptionB("bc");
-                questions.setOptionC("cd");
-                questions.setOptionD("Basic");
-                questions.setCorrectAnswer("Basic");
-                questions.setQuestionExplaination("hello there");
-                questions.setQuestionName("what ar hugjb dfb?");
+               // upload topic
 
-                FireBaseHandler fireBaseHandler = new FireBaseHandler();
-                fireBaseHandler.uploadComputerQuestion(questions, new FireBaseHandler.OnQuestionlistener() {
+                FireBaseHandler fireBaseHandler =new FireBaseHandler();
+                fireBaseHandler.uploadComputerTopicName("Hey", new FireBaseHandler.OnTopiclistener() {
                     @Override
-                    public void onQuestionDownLoad(Questions questions, boolean isSuccessful) {
+                    public void onTopicDownLoad(String topic, boolean isSuccessful) {
 
                     }
 
                     @Override
-                    public void onQuestionListDownLoad(ArrayList<Questions> questionList, boolean isSuccessful) {
+                    public void onTopicListDownLoad(ArrayList<String> topicList, boolean isSuccessful) {
 
                     }
 
                     @Override
-                    public void onQuestionUpload(boolean isSuccessful) {
-                        Toast.makeText(ComputerQuizTopicActivity.this, "QUestion Uploaded", Toast.LENGTH_SHORT).show();
+                    public void onTopicUpload(boolean isSuccessful) {
+
                     }
                 });
+
+
             }
         });
 

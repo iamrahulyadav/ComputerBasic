@@ -13,8 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import utils.FireBaseHandler;
 import utils.Questions;
@@ -46,8 +48,46 @@ public class ComputerQuizActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                //Generating a random number between 0-1000
+                int min = 0;
+                int max = 1000;
+                Random r = new Random();
+                int randomNumber = r.nextInt(max - min + 1) + min;
+
+                //upload question
+                Questions questions = new Questions();
+                questions.setQuestionTopicName("Basic");
+                questions.setOptionA("ab");
+                questions.setOptionB("bc");
+                questions.setOptionC("cd");
+                questions.setOptionD("Basic");
+                questions.setCorrectAnswer("Basic");
+                questions.setQuestionExplaination("hello there");
+                questions.setQuestionName("what ar hugjb dfb?");
+                questions.setPusnNotification(false);
+                questions.setNotificationText("");
+                questions.setRandomNumber(randomNumber);
+
+
+                FireBaseHandler fireBaseHandler = new FireBaseHandler();
+                fireBaseHandler.uploadComputerQuestion(questions, new FireBaseHandler.OnQuestionlistener() {
+                    @Override
+                    public void onQuestionDownLoad(Questions questions, boolean isSuccessful) {
+
+                    }
+
+                    @Override
+                    public void onQuestionListDownLoad(ArrayList<Questions> questionList, boolean isSuccessful) {
+
+                    }
+
+                    @Override
+                    public void onQuestionUpload(boolean isSuccessful) {
+                        Toast.makeText(ComputerQuizActivity.this, "QUestion Uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
