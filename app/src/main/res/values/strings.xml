@@ -10,5 +10,5 @@
     <string name="title_activity_short_keys">ShortKeysActivity</string>
     <string name="title_activity_short_key_detail">Short Key</string>
     <string name="title_activity_computer_quiz">Computer Quiz</string>
-    <string name="title_activity_computer_quiz_topic">Computer Quiz Topic</string>
+    <string name="title_activity_computer_quiz_topic">Computer Quiz</string>
 </resources>

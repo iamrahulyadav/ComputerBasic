@@ -1,5 +1,7 @@
 package utils;
 
+import com.facebook.ads.NativeAd;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +22,8 @@ public class Questions implements Serializable {
     private boolean pusnNotification;
     private String notificationText;
     private int randomNumber;
+
+    transient NativeAd nativeAd;
 
     public String getNotificationText() {
         return notificationText;
@@ -115,5 +119,14 @@ public class Questions implements Serializable {
 
     public void setQuestionUID(String questionUID) {
         this.questionUID = questionUID;
+    }
+
+
+    public NativeAd getNativeAd() {
+        return nativeAd;
+    }
+
+    public void setNativeAd(NativeAd nativeAd) {
+        this.nativeAd = nativeAd;
     }
 }

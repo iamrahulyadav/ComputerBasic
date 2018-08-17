@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.NativeAd;
+import com.facebook.ads.NativeAdView;
+
 import org.w3c.dom.Text;
 
 import utils.Questions;
@@ -102,6 +108,11 @@ public class ComputerQuizFragment extends Fragment implements View.OnClickListen
         questionExplaination = (TextView) view.findViewById(R.id.question_explaination_textview);
         explainationDisplayCardview = (CardView) view.findViewById(R.id.question_explaination_cardview);
 
+
+
+        initializeNativeAd(view);
+
+
         return view;
     }
 
@@ -176,6 +187,78 @@ public class ComputerQuizFragment extends Fragment implements View.OnClickListen
             optionDCardView.setBackgroundResource(R.drawable.mygreenbutton);
         }
     }
+
+    private void initializeNativeAd(final View view) {
+
+        final NativeAd nativeAd = questions.getNativeAd();
+        if (nativeAd != null) {
+
+            if (nativeAd.isAdLoaded()) {
+
+                CardView adContainer = (CardView) view.findViewById(R.id.nativeAd_view_container);
+                adContainer.setVisibility(View.VISIBLE);
+
+                adContainer.removeAllViews();
+
+                View adView = NativeAdView.render(getContext(), nativeAd, NativeAdView.Type.HEIGHT_300);
+                // Add the Native Ad View to your ad container
+                adContainer.addView(adView);
+
+
+            } else {
+
+                nativeAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+
+                        if (view != null) {
+
+                            try {
+                                CardView adContainer = (CardView) view.findViewById(R.id.nativeAd_view_container);
+                                adContainer.setVisibility(View.VISIBLE);
+
+
+                                adContainer.removeAllViews();
+
+                                View adView = NativeAdView.render(getContext(), nativeAd, NativeAdView.Type.HEIGHT_300);
+                                // Add the Native Ad View to your ad container
+                                adContainer.addView(adView);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+
+                    }
+                });
+
+                View adContainer = view.findViewById(R.id.nativeAd_view_container);
+                adContainer.setVisibility(View.GONE);
+
+            }
+        } else {
+            View adContainer = view.findViewById(R.id.nativeAd_view_container);
+            adContainer.setVisibility(View.GONE);
+
+        }
+
+    }
+
 
 
     @Override

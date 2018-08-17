@@ -26,4 +26,6 @@
 
     <color name="colorWhitish">#edf1f4</color>
 
+    <color name="colorBackground">#d2d2d2</color>
+
 </resources>

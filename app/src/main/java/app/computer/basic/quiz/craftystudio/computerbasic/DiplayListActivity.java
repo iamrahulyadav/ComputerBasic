@@ -140,6 +140,7 @@ public class DiplayListActivity extends AppCompatActivity {
 
 
 
+
     public void initializeTopAdmobAds() {
 
 

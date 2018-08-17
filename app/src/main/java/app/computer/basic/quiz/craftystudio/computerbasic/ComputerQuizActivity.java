@@ -11,9 +11,18 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.NativeAd;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,6 +53,7 @@ public class ComputerQuizActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +100,7 @@ public class ComputerQuizActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
         questionNumberDisplayTextview = (TextView) findViewById(R.id.computer_quiz_questionNumber_Textview);
@@ -107,6 +118,18 @@ public class ComputerQuizActivity extends AppCompatActivity {
 
 //        Download QUestions from CLicked Topic Name
         downloadQuestionsByTopic(topicName);
+
+
+        try {
+            Answers.getInstance().logContentView(new ContentViewEvent().putContentName("Quiz" + " - " + topicName).putContentType("Quiz"));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -129,6 +152,8 @@ public class ComputerQuizActivity extends AppCompatActivity {
                         mQuestionsList.add(questions);
                     }
 
+                    addNativeAds();
+
                     mPagerAdapter.notifyDataSetChanged();
                 }
 
@@ -144,6 +169,54 @@ public class ComputerQuizActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+    public void addNativeAds() {
+
+        for (int i = 1; i < mQuestionsList.size(); i = i + 3) {
+            if (mQuestionsList.get(i).getNativeAd() == null) {
+
+                NativeAd nativeAd = new NativeAd(this, "1359885114112144_1461096457324342");
+                nativeAd.setAdListener(new AdListener() {
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        Log.d("TAG", "onError: " + adError.getErrorMessage());
+
+                        try {
+                            Answers.getInstance().logCustom(new CustomEvent("Ad failed").putCustomAttribute("message", adError.getErrorMessage()).putCustomAttribute("Placement", "banner"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+
+                    }
+
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+
+                    }
+                });
+
+                // Initiate a request to load an ad.
+                nativeAd.loadAd();
+
+                mQuestionsList.get(i).setNativeAd(nativeAd);
+
+            }
+        }
+    }
+
 
     private void initializeViewPager() {
 
